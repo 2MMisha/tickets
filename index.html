@@ -10,73 +10,95 @@
       background: #f4f4f4;
       margin: 0;
       padding: 20px;
+      color: #333;
     }
 
     h1 {
       text-align: center;
+      margin-bottom: 0;
     }
 
     .stage {
-      margin: 20px auto;
+      margin: 20px auto 30px;
       width: 80%;
+      max-width: 720px;
       background: #222;
       color: white;
       text-align: center;
       padding: 10px;
       border-radius: 6px;
       font-weight: bold;
+      font-size: 1.1rem;
+      user-select: none;
     }
 
+    /* Container for legend + form side by side */
+    .legend-form-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      max-width: 720px;
+      margin: 0 auto 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Legend styles */
+    .legend {
+      min-width: 220px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #222;
+      user-select: none;
+    }
+    .legend div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .legend-color.price-80 {
+      background-color: #d2691e;
+    }
+    .legend-color.price-60 {
+      background-color: #3a6ea5;
+    }
+    .legend-color.occupied {
+      background-color: #888;
+    }
+    .legend-color.selected {
+      background-color: #4caf50;
+    }
+
+    /* Seating area styles */
     .seating {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      margin-top: 20px;
-    }
-    
-.seat.price-80 {
-  background-color: #d2691e; /* dark orange */
-  color: white;
-}
-
-.seat.price-60 {
-  background-color: #3a6ea5; /* medium blue */
-  color: white;
-}
-    
-    .row {
-      display: flex;
-      gap: 4px;
-      perspective: 800px;
-    }
-
-    .seat {
-      width: 26px;
-      height: 26px;
-      background-color: #ccc;
-      border-radius: 4px;
-      text-align: center;
-      line-height: 26px;
-      font-size: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .seat.selected {
-      background-color: #4caf50;
-      color: white;
-    }
-
-    .seat.occupied {
-      background-color: #888;
-      cursor: not-allowed;
+      margin: 0 auto 30px;
+      width: 80%;
+      max-width: 720px;
+      user-select: none;
     }
 
     .curved .row {
-      transform: perspective(600px) rotateX(12deg);
+      perspective: 800px;
+      transform-style: preserve-3d;
+      transform-origin: center;
     }
 
+    .row {
+      display: flex;
+      gap: 4px;
+    }
+
+    /* Curved rotation per row */
     .row:nth-child(1) { transform: rotateZ(-8deg); }
     .row:nth-child(2) { transform: rotateZ(-6deg); }
     .row:nth-child(3) { transform: rotateZ(-4deg); }
@@ -87,37 +109,120 @@
     .row:nth-child(8) { transform: rotateZ(6deg); }
     .row:nth-child(9) { transform: rotateZ(8deg); }
 
+    .seat {
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 26px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      color: white;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .seat.price-80 {
+      background-color: #d2691e;
+    }
+
+    .seat.price-60 {
+      background-color: #3a6ea5;
+    }
+
+    .seat.selected {
+      background-color: #4caf50 !important;
+    }
+
+    .seat.occupied {
+      background-color: #888 !important;
+      cursor: not-allowed;
+    }
+
+    /* Form styles */
     form {
       background: white;
       padding: 20px;
-      max-width: 500px;
-      margin: 40px auto;
+      max-width: 350px;
       border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: #333;
+    }
+
+    form h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-align: center;
     }
 
     label {
-      display: block;
-      margin-top: 10px;
+      font-weight: 600;
     }
 
-    input, button {
-      width: 100%;
+    input[type="text"],
+    input[type="email"] {
       padding: 8px;
-      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4caf50;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
     }
 
     .note {
       font-size: 0.9em;
       color: darkred;
-      margin-top: 10px;
+      text-align: center;
+      margin-top: 8px;
     }
 
     #selectedSeats, #totalPrice {
-      margin-top: 10px;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 1em;
+      text-align: center;
+      margin-top: 8px;
     }
 
-    @media (max-width: 600px) {
+    /* Responsive */
+    @media (max-width: 700px) {
+      .legend-form-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form {
+        max-width: 100%;
+        width: 90vw;
+      }
+
+      .seating {
+        width: 90vw;
+      }
+    }
+
+    @media (max-width: 480px) {
       .seat {
         width: 20px;
         height: 20px;
@@ -129,33 +234,37 @@
 </head>
 <body>
   <h1>Hal 9 - Ticket Reservation</h1>
-  <div style="display:flex; justify-content:center; gap:20px; margin-bottom:20px;">
-  <div><div style="width:20px; height:20px; background:#d2691e; display:inline-block; border-radius:4px; margin-right:6px;"></div>Rows 1-2 (80 NIS)</div>
-  <div><div style="width:20px; height:20px; background:#3a6ea5; display:inline-block; border-radius:4px; margin-right:6px;"></div>Rows 3-9 (60 NIS)</div>
-  <div><div style="width:20px; height:20px; background:#888; display:inline-block; border-radius:4px; margin-right:6px;"></div>Occupied</div>
-  <div><div style="width:20px; height:20px; background:#4caf50; display:inline-block; border-radius:4px; margin-right:6px;"></div>Selected</div>
-</div>
 
-  <div class="stage">STAGE</div>
-  <div class="seating curved" id="seatingArea"></div>
+  <div class="legend-form-container" aria-label="Seat color legend and reservation form">
+    <div class="legend" aria-label="Seat legend">
+      <div><div class="legend-color price-80"></div>Rows 1-2 (80 NIS)</div>
+      <div><div class="legend-color price-60"></div>Rows 3-9 (60 NIS)</div>
+      <div><div class="legend-color occupied"></div>Occupied</div>
+      <div><div class="legend-color selected"></div>Selected</div>
+    </div>
 
-  <form onsubmit="submitReservation(event)">
-    <h2>Reserve Seats</h2>
+    <form onsubmit="submitReservation(event)" aria-label="Reservation form">
+      <h2>Reserve Seats</h2>
 
-    <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" name="Full Name" required>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="Full Name" required autocomplete="name" />
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="Email" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required autocomplete="email" />
 
-    <div id="selectedSeats">Selected Seats: None</div>
-    <div id="totalPrice">Total Price: 0 NIS</div>
+      <div id="selectedSeats" aria-live="polite" aria-atomic="true">Selected Seats: None</div>
+      <div id="totalPrice" aria-live="polite" aria-atomic="true">Total Price: 0 NIS</div>
 
-    <input type="hidden" id="bookingCodeInput" name="Booking Code">
+      <input type="hidden" id="bookingCodeInput" name="Booking Code" />
 
-    <p class="note">This is only a reservation. Payment is at the venue.</p>
-    <button type="submit">Submit Reservation</button>
-  </form>
+      <p class="note">This is only a reservation. Payment is at the venue.</p>
+      <button type="submit">Submit Reservation</button>
+    </form>
+  </div>
+
+  <div class="stage" aria-label="Stage">STAGE</div>
+
+  <div class="seating curved" id="seatingArea" role="list" aria-label="Seating area"></div>
 
   <script>
     const seatingArea = document.getElementById("seatingArea");
@@ -174,38 +283,51 @@
       })
       .catch(() => renderSeats());
 
-function renderSeats() {
-  seatingArea.innerHTML = ''; // clear before rendering
-  for (let r = 1; r <= 9; r++) {
-    const row = document.createElement("div");
-    row.className = "row";
-    for (let s = 1; s <= 24; s++) {
-      const id = `R${r}S${s}`;
-      const seat = document.createElement("div");
-      seat.className = "seat";
-      seat.dataset.id = id;
-      seat.dataset.row = r;
-      seat.textContent = s;
+    function renderSeats() {
+      seatingArea.innerHTML = ''; // clear before rendering
+      for (let r = 1; r <= 9; r++) {
+        const row = document.createElement("div");
+        row.className = "row";
+        row.setAttribute('role', 'listitem');
+        for (let s = 1; s <= 24; s++) {
+          const id = `R${r}S${s}`;
+          const seat = document.createElement("div");
+          seat.className = "seat";
+          seat.dataset.id = id;
+          seat.dataset.row = r;
+          seat.textContent = s;
+          seat.setAttribute('role', 'button');
+          seat.setAttribute('tabindex', reservedSeats.includes(id) ? '-1' : '0');
+          seat.setAttribute('aria-pressed', 'false');
+          seat.setAttribute('aria-label', `Row ${r} Seat ${s}`);
 
-      // Add price class for colors
-      if (r <= 2) {
-        seat.classList.add("price-80");
-      } else {
-        seat.classList.add("price-60");
+          // Add price class for colors
+          if (r <= 2) {
+            seat.classList.add("price-80");
+          } else {
+            seat.classList.add("price-60");
+          }
+
+          if (reservedSeats.includes(id)) {
+            seat.classList.add("occupied");
+            seat.setAttribute('aria-disabled', 'true');
+            seat.onclick = null;
+            seat.onkeydown = null;
+          } else {
+            seat.onclick = () => toggleSeat(seat);
+            seat.onkeydown = (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleSeat(seat);
+              }
+            };
+          }
+
+          row.appendChild(seat);
+        }
+        seatingArea.appendChild(row);
       }
-
-      if (reservedSeats.includes(id)) {
-        seat.classList.add("occupied");
-      } else {
-        seat.onclick = () => toggleSeat(seat);
-      }
-
-      row.appendChild(seat);
     }
-    seatingArea.appendChild(row);
-  }
-}
-
 
     function toggleSeat(seat) {
       const id = seat.dataset.id;
@@ -213,9 +335,11 @@ function renderSeats() {
       if (index > -1) {
         selectedSeats.splice(index, 1);
         seat.classList.remove("selected");
+        seat.setAttribute('aria-pressed', 'false');
       } else {
         selectedSeats.push(id);
         seat.classList.add("selected");
+        seat.setAttribute('aria-pressed', 'true');
       }
       updateSummary();
     }
@@ -237,8 +361,17 @@ function renderSeats() {
 
     async function submitReservation(event) {
       event.preventDefault();
+
       if (selectedSeats.length === 0) {
         alert("Please select at least one seat.");
+        return;
+      }
+
+      const fullName = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!fullName || !email) {
+        alert("Please fill in your name and email.");
         return;
       }
 
@@ -249,21 +382,36 @@ function renderSeats() {
         event_type: "new-reservation",
         client_payload: {
           seats: selectedSeats.join(","),
-          code: bookingCode
+          code: bookingCode,
+          fullName,
+          email
         }
       };
 
-      await fetch("https://api.github.com/repos/2MMisha/tickets/dispatches", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer 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", // Replace this
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      try {
+        const response = await fetch("https://api.github.com/repos/2MMisha/tickets/dispatches", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer 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", // Replace with your real token!
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
 
-      alert("Reservation submitted! Your booking code: " + bookingCode);
-      location.reload();
+        if (!response.ok) throw new Error(`Status ${response.status}`);
+
+        alert(`Reservation submitted!\n\nName: ${fullName}\nEmail: ${email}\nSeats: ${selectedSeats.join(", ")}\nBooking Code: ${bookingCode}\n\nPayment is at the venue.`);
+
+        // Reset state & UI
+        selectedSeats = [];
+        renderSeats();
+        updateSummary();
+        event.target.reset();
+
+      } catch (error) {
+        alert("Failed to submit reservation. Please try again.");
+        console.error(error);
+      }
     }
   </script>
 </body>
