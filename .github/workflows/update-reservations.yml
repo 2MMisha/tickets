@@ -1,0 +1,29 @@
+name: Update Reserved Seats
+
+on:
+  repository_dispatch:
+    types: [new-reservation]
+
+jobs:
+  update-reservation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Update reserved-seats.json
+        run: |
+          node .github/scripts/add-reservation.js "${{ github.event.client_payload.seats }}" "${{ github.event.client_payload.code }}"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add reserved-seats.json
+          git commit -m "Add new reservation: ${{ github.event.client_payload.code }}"
+          git push
