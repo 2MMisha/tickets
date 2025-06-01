@@ -39,7 +39,8 @@
       gap: 40px;
       max-width: 720px;
       margin: 0 auto 40px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      align-items: flex-start;
     }
 
     /* Legend styles */
@@ -87,27 +88,11 @@
       user-select: none;
     }
 
-    .curved .row {
-      perspective: 800px;
-      transform-style: preserve-3d;
-      transform-origin: center;
-    }
-
     .row {
       display: flex;
       gap: 4px;
+      /* No rotation for straight rows */
     }
-
-    /* Curved rotation per row */
-    .row:nth-child(1) { transform: rotateZ(-8deg); }
-    .row:nth-child(2) { transform: rotateZ(-6deg); }
-    .row:nth-child(3) { transform: rotateZ(-4deg); }
-    .row:nth-child(4) { transform: rotateZ(-2deg); }
-    .row:nth-child(5) { transform: rotateZ(0deg); }
-    .row:nth-child(6) { transform: rotateZ(2deg); }
-    .row:nth-child(7) { transform: rotateZ(4deg); }
-    .row:nth-child(8) { transform: rotateZ(6deg); }
-    .row:nth-child(9) { transform: rotateZ(8deg); }
 
     .seat {
       width: 26px;
@@ -264,7 +249,7 @@
 
   <div class="stage" aria-label="Stage">STAGE</div>
 
-  <div class="seating curved" id="seatingArea" role="list" aria-label="Seating area"></div>
+  <div class="seating" id="seatingArea" role="list" aria-label="Seating area"></div>
 
   <script>
     const seatingArea = document.getElementById("seatingArea");
